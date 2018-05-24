@@ -6,7 +6,7 @@ node{
         sh 'mvn package'
     }
     stage('results'){
-       archive 'gameoflife-web/target/gameoflife.war'
-       junit 'gameoflife-web/target/surefire-reports/*.xml'
+        archive 'gameoflife-web/target/gameoflife.war'
+        junit 'gameoflife-web/target/surefire-reports/*.xml'
     }
 }

@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('git clone'){
             steps{
-                sh 'https://github.com/bvnsaichandu/game-of-life.git'
+                git 'https://github.com/bvnsaichandu/game-of-life.git'
             }
         }
         stage('package'){

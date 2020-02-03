@@ -1,11 +1,15 @@
-pipeline {
-  stages{
-    stage('SCM'){
-        git 'https://github.com/bvnsaichandu/game-of-life.git'
-    }
-	
-    stage('Build & Package'){
-        sh 'mvn clean package'
-    }
-  }
+pipeline{
+        agent any
+        stages {
+             stage('git clone') {
+                  steps {
+                       sh 'https://github.com/immurali5/game-of-life.git'
+                   }
+             }
+             stage('Package') {
+                  steps {
+                       sh 'mvn clean package'
+                   }
+             }
+
 }

@@ -1,7 +1,7 @@
 pipeline{
     environment {
         registry = "bvnsaichandu/gofpipeline"
-        registryCredential = 'dockerhub'
+        registryCredential = '234a8511-2c6b-4c5f-8d8b-57ac8bdf5c02'
         dockerImage = ''
     }
     agent any

@@ -6,6 +6,11 @@ pipeline{
     }
     agent any
     stages{
+        stage("build started"){
+            steps{
+                slackSend channel: 'test', message: 'started'
+            }
+        }
         stage("git clone"){
             steps{
                 git 'https://github.com/bvnsaichandu/game-of-life.git'
@@ -32,15 +37,13 @@ pipeline{
                 }
             }
         }
-        stage("slack notification"){
-            steps{
-                success{
-                    slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-                }
-                failure{
-                    slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-                }
-            }
+    }    
+    post("slack notification"){
+        success{
+            slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
+        failure{
+                slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        }         
     }
 }

@@ -5,10 +5,12 @@ pipeline{
         dockerImage = ''
     }
     agent any
-    def notifyStarted(){
-        slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-    }
     stages{
+        stage("build started"){
+            steps{
+                slackSend channel: 'test', message: 'started'
+            }
+        }
         stage("git clone"){
             steps{
                 git 'https://github.com/bvnsaichandu/game-of-life.git'
@@ -45,4 +47,3 @@ pipeline{
         }         
     }
 }
-
